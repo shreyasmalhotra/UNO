@@ -1,3 +1,19 @@
+/*
+   
+                                      ECGR 2104
+                                      
+                                     UNO PROJECT
+    
+    TEAM MEMBERS
+    
+    Naseeruddin Lodge
+    Shreyas Malhotra
+    Adriel Campos
+    Zion Philson
+    
+*/
+
+
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
@@ -33,7 +49,7 @@ the indicies of the vector at that index is each individual card within the
 player's hand. */                                                                   
 
 void renderHand(vector<Card*> hand);
-/*Renders the cards in he hand vector passed.
+/*Renders the cards in the hand vector passed.
 @param hand A vector containing Card pointers */
 
 void renderDiscard(vector<Card*>);
@@ -170,8 +186,10 @@ void drawCards(vector<Card*> &deck, vector<Card*> &target, int numToDraw){
         if(deck.size() > 0){
             target.push_back(deck.at(deck.size() - 1));
             deck.pop_back();
-        } else {
-            cout << "WARNING: Deck out of cards" << endl;
+        } else if(deck.size() <= 0) {
+            
+            buildDeck(deck);
+            shuffleDeck(deck);
         }
     }
 }

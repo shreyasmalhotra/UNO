@@ -195,16 +195,16 @@ string WildCard::render(int line) const{
         case 2: 
             switch(color){
             case RED:
-                return "|    RED    |";
+                return "|           |";
                 break;
             case BLUE:
-                return "|    BLUE   |";
+                return "|           |";
                 break;
             case GREEN:
-                return "|   GREEN   |";
+                return "|           |";
                 break;
             case YELLOW:
-                return "|  YELLOW   |";
+                return "|           |";
                 break;
             default:
                 return "|           |";
@@ -325,16 +325,16 @@ string DrawFour::render(int line) const{
         case 2: 
             switch(color){
             case RED:
-                return "|    RED    |";
+                return "|           |";
                 break;
             case BLUE:
-                return "|    BLUE   |";
+                return "|           |";
                 break;
             case GREEN:
-                return "|   GREEN   |";
+                return "|           |";
                 break;
             case YELLOW:
-                return "|  YELLOW   |";
+                return "|           |";
                 break;
             default:
                 return "|           |";
