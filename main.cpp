@@ -9,35 +9,36 @@ using namespace std;
 
 void clearTerminal(); // Function to clear the terminal by inserting many new line characters.
 
-void buildDeck(vector<Card*>& deck);/* Function to populate the deck with cards.
-                                       @param deck A vector reference of Card pointers representing the deck */
+void buildDeck(vector<Card*>& deck);
+/* Function to populate the deck with cards.
+@param deck A vector reference of Card pointers representing the deck */
 
- void shuffleDeck(vector<Card*>&);/* Function to shuffle the deck.
-                                     @param deck A vector reference of Card pointers representing the deck */
+ void shuffleDeck(vector<Card*>&);
+/* Function to shuffle the deck.  
+@param deck A vector reference of Card pointers representing the deck */
 
 
+void drawCards(vector<Card*>& deck, vector<Card*>& target, int);
+/* Function to draw a card from the deck to either the hand or discard pile.                                                                  
+@param deck A vector reference of Card pointers representing the deck                                                                   
+@param target A vector representing the structure that the card being drawn                                                                   
+from the deck is being drawn to. This can be either a hand or the discard pile */                                                                   
 
-void drawCards(vector<Card*>& deck, vector<Card*>& target, int);/* Function to draw a card from the deck to either the hand or discard pile.
-                                                                  
-                                                                   @param deck A vector reference of Card pointers representing the deck
-                                                                   @param target A vector representing the structure that the card being drawn 
-                                                                   from the deck is being drawn to. This can be either a hand or the discard pile */
+void populateHands(vector<Card*>& deck, vector<vector<Card*>>& hands);
+/* Function to draw 7 cards to each player's hand at the beginning of the game.                                                                     
+@param deck A vector reference of Card pointers representing the deck.                                                                         
+@param hands A vector of vector of Card pointers representing each player
+and their hands. The indicies of the first vector represents a player, and                                                                         
+the indicies of the vector at that index is each individual card within the                                                                          
+player's hand. */                                                                   
 
-void populateHands(vector<Card*>& deck, vector<vector<Card*>>& hands);/* Function to draw 7 cards to each player's hand at the beginning of the game.
-                                                                     
-                                                                         @param deck A vector reference of Card pointers representing the deck.
-                                                                         @param hands A vector of vector of Card pointers representing each player 
-                                                                         and their hands. The indicies of the first vector represents a player, and 
-                                                                         the indicies of the vector at that index is each individual card within the 
-                                                                         player's hand. */
+void renderHand(vector<Card*> hand);
+/*Renders the cards in he hand vector passed.
+@param hand A vector containing Card pointers */
 
-void renderHand(vector<Card*> hand);/* Renders the cards in he hand vector passed.
-                                       
-                                       @param hand A vector containing Card pointers */
-
-void renderDiscard(vector<Card*>);/* Renders the top card of the passed discard vector.
-                                     
-                                     @param hand A vector containing Card pointers */
+void renderDiscard(vector<Card*>);
+ /* Renders the top card of the passed discard vector   
+@param hand A vector containing Card pointers */
 
 bool takeTurn(vector<Card*>& deck, vector<Card*>& hand, vector<Card*>& discard, GameState& gameState);
 /* Passed references to the deck, hand, and discard vectors and a reference to 
@@ -54,6 +55,7 @@ bool takeTurn(vector<Card*>& deck, vector<Card*>& hand, vector<Card*>& discard, 
 int main(){
     srand(time(0));
     const int NUM_PLAYERS = 2;
+    int track;
     bool doneWithUNO = false;
     GameState gameState(NUM_PLAYERS);
     
@@ -67,9 +69,19 @@ int main(){
     populateHands(deck, hands);
     drawCards(deck, discard, 1);
     
-    while(doneWithUNO != true) {
+    
+    
+    while(doneWithUNO != true){
         doneWithUNO = takeTurn(deck, hands.at(gameState.currentPlayerIndex), discard, gameState);
+        
+        for(track = 0 ; track < NUM_PLAYERS ; track++){
+            if(hands[track].size() == 0){
+            break;
+            }  
         }
+    }
+    
+    cout << "PLAYER " << track << " WON THE GAME!!!!!!!" << endl;
     
     
     
@@ -180,7 +192,7 @@ void renderDiscard(vector<Card*> discard){
 bool takeTurn(vector<Card*> &deck, vector<Card*> &hand, vector<Card*> &discard, GameState &gameState){
     bool noCardsLeft = false;
     
-    //clearTerminal();
+    clearTerminal();
     renderDiscard(discard);
     cout << "Player " << gameState.currentPlayerIndex << "'s turn." << endl;
     

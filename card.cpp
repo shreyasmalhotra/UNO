@@ -115,10 +115,10 @@ string ReverseCard::render(int line) const{
 bool ReverseCard::play(Card* discard, GameState &gameState){
     
     
-    if(color == discard->getColor() || (number >= 10 && number <= 11)){
+    if(color == discard->getColor() && (number >= 10 && number <= 11)){
         
         
-        if (gameState.turnDirection == LEFT){
+        if (gameState.turnDirection == LEFT ){
             
             gameState.turnDirection = RIGHT;
             
@@ -176,7 +176,7 @@ string SkipCard::render(int line) const{
 
 bool SkipCard::play(Card* discard, GameState &gameState) {
     
-    if(color == discard->getColor() || (number >= 12 && number <= 13)){
+    if(color == discard->getColor() && (number >= 12 && number <= 13)){
         gameState.skipTurn = true;
     }
 
@@ -301,7 +301,7 @@ string DrawTwo::render(int line) const{
 
 bool DrawTwo::play(Card* discard, GameState &gameState) {
     
-    if(color == discard->getColor() || (number >= 14 && number <= 15)){
+    if(color == discard->getColor() && (number >= 16 && number <= 17)){
         
         gameState.numCardsToDraw = 2;
         gameState.skipTurn = true;
