@@ -54,9 +54,13 @@ bool takeTurn(vector<Card*>& deck, vector<Card*>& hand, vector<Card*>& discard, 
 
 int main(){
     srand(time(0));
-    const int NUM_PLAYERS = 2;
+    int NUM_PLAYERS;
     int track;
     bool doneWithUNO = false;
+    
+    cout << "Enter the number of player: ";
+    cin >> NUM_PLAYERS;
+    
     GameState gameState(NUM_PLAYERS);
     
     vector<Card*> deck;
@@ -136,6 +140,15 @@ void buildDeck(vector<Card*> &deck){
     for(int c = RED; c < NUM_COLORS; c++){
         for(int n = 16; n < 18; n++){
             Card* temp = new DrawTwo((Color)c, n);
+            deck.push_back(temp);
+            deck.push_back(temp);
+        }
+    }
+    
+    //create Draw 4 cards
+    for(int c = RED; c < NUM_COLORS; c++){
+        for(int n = 18; n < 20; n++){
+            Card* temp = new DrawFour((Color)c, n);
             deck.push_back(temp);
             deck.push_back(temp);
         }

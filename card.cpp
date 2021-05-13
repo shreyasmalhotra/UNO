@@ -309,3 +309,89 @@ bool DrawTwo::play(Card* discard, GameState &gameState) {
     }
 
 }
+
+//
+
+DrawFour::DrawFour(Color c, int n) {
+    setColor(c);
+    setNumber(n);
+}
+
+string DrawFour::render(int line) const{
+    stringstream ss;
+    switch(line){
+        case 0: return ".___________.";
+        case 1: return "|           |";
+        case 2: 
+            switch(color){
+            case RED:
+                return "|    RED    |";
+                break;
+            case BLUE:
+                return "|    BLUE   |";
+                break;
+            case GREEN:
+                return "|   GREEN   |";
+                break;
+            case YELLOW:
+                return "|  YELLOW   |";
+                break;
+            default:
+                return "|           |";
+                break;
+            break;
+            }
+        case 3:
+            ss << "|  Draw 4   |";
+            return ss.str();
+            break;
+        case 4: return "|           |";
+        case 5: return "|           |";
+        case 6: return "|           |";
+        case 7: return "|___________|";
+        default:
+            return " ";
+    }
+}
+
+
+bool DrawFour::play(Card* discard, GameState &gameState){
+    
+    int colorNumber;
+    bool doneWithColor = false;
+    cout << "You chose the wild card, please choose a color: 0-RED, 1-BLUE, 2-GREEN, 3-YELLOW" << endl;
+    cin >> colorNumber;
+    while (doneWithColor != true) {
+        if (colorNumber == 0) {
+            color = RED;
+            doneWithColor = true;
+            gameState.numCardsToDraw = 4;
+            gameState.skipTurn = true;
+        }
+        else if (colorNumber == 1) {
+            color = BLUE;
+            doneWithColor = true;
+            gameState.numCardsToDraw = 4;
+            gameState.skipTurn = true;
+        }
+        else if (colorNumber == 2) {
+            color = GREEN;
+            doneWithColor = true;
+            gameState.numCardsToDraw = 4;
+            gameState.skipTurn = true;
+        }
+        else if (colorNumber == 3) {
+            color = YELLOW;
+            doneWithColor = true;
+            gameState.numCardsToDraw = 4;
+            gameState.skipTurn = true;
+        }
+        else {
+            cout << "Invalid entry, please try again." << endl;
+            cin >> colorNumber;
+        }
+    }
+    
+    return true;
+    
+}

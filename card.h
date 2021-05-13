@@ -135,4 +135,15 @@ class DrawTwo : public Card {
     bool play(Card*, GameState&);
 };
 
+class DrawFour : public Card{
+  
+  public:
+  DrawFour(Color c, int n);
+  
+  string render(int) const;
+  
+  bool play(Card*, GameState&);
+    
+};
+
 #endif
