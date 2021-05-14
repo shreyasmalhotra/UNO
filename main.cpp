@@ -16,6 +16,8 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <limits>
 #include <stdlib.h>
 #include <time.h>
 #include "game_state.h"
@@ -32,7 +34,6 @@ void buildDeck(vector<Card*>& deck);
  void shuffleDeck(vector<Card*>&);
 /* Function to shuffle the deck.  
 @param deck A vector reference of Card pointers representing the deck */
-
 
 void drawCards(vector<Card*>& deck, vector<Card*>& target, int);
 /* Function to draw a card from the deck to either the hand or discard pile.                                                                  
@@ -76,7 +77,29 @@ int main(){
     
     cout << "Enter the number of player: ";
     cin >> NUM_PLAYERS;
-    
+
+    while((NUM_PLAYERS <= 1 || NUM_PLAYERS >= 11) || !(cin.good())){
+        
+        if(!(cin.good())){
+        while(!(cin.good())){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid entry. Enter a number: ";
+            cin >> NUM_PLAYERS; 
+            
+            
+        }
+        }
+        
+        else if((NUM_PLAYERS <= 1 || NUM_PLAYERS >= 11) && (cin.good())){
+        while((NUM_PLAYERS <= 1 || NUM_PLAYERS >= 11) && (cin.good())){
+           
+           cout << "Invalid entry. Enter a number: ";
+           cin >> NUM_PLAYERS;  
+            
+        }
+    }
+    }
     GameState gameState(NUM_PLAYERS);
     
     vector<Card*> deck;
@@ -248,7 +271,7 @@ bool takeTurn(vector<Card*> &deck, vector<Card*> &hand, vector<Card*> &discard, 
         
         
         // Evaluate user input
-        if (input < i) {
+        if (input > 0 && input < i) {
             // Play card at index input
             if(hand.at(input)->play(discard.at(discard.size()-1), gameState)){
                 Card* temp;
