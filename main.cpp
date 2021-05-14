@@ -270,8 +270,33 @@ bool takeTurn(vector<Card*> &deck, vector<Card*> &hand, vector<Card*> &discard, 
         cin >> input;
         
         
+        while((input <  0) || (input > i) || !(cin.good())){
+        
+        if(!(cin.good())){
+        while(!(cin.good())){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Improper choice" << endl;
+            takeTurn(deck, hand, discard, gameState);
+            return false; 
+            
+            
+        }
+        }
+        
+        else if((input <  0) || (input > i) && (cin.good())){
+        while((input <  0) || (input > i) && (cin.good())){
+           
+           cout << "Improper choice" << endl;
+            takeTurn(deck, hand, discard, gameState);
+            return false; 
+            
+        }
+    }
+    }
+
         // Evaluate user input
-        if (input > 0 && input < i) {
+        if (input < i){
             // Play card at index input
             if(hand.at(input)->play(discard.at(discard.size()-1), gameState)){
                 Card* temp;
